@@ -5,7 +5,7 @@ class Highscore
     property :id, Serial
     property :name, String
     property :mode, String
-    property :score, String
+    property :score, Float
     property :created_at, DateTime
 end
 
