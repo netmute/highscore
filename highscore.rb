@@ -14,12 +14,10 @@ Highscore.auto_upgrade!
 
 get '/' do
   content_type :json
-  @highscores = Highscore.all(mode: params[:mode], order: :score.asc, limit: 10)
-  @highscores.to_json
+  Highscore.all(mode: params[:mode], order: :score.asc, limit: 10).to_json
 end
 
 post '/' do
   content_type :json
-  @highscore = Highscore.create(params)
-  @highscore.to_json
+  Highscore.create(params).to_json
 end
