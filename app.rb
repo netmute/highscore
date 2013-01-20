@@ -3,21 +3,34 @@ DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/highscore.db")
 class Highscore
     include DataMapper::Resource
     property :id, Serial
-    property :name, String
-    property :mode, String
-    property :score, Float
+    property :game, String
+    property :scope, String
+    property :player, String
+    property :score, Integer
     property :created_at, DateTime
 end
 
 DataMapper.finalize
 Highscore.auto_upgrade!
 
-get '/' do
-  content_type :json
-  Highscore.all(mode: params[:mode], order: :score.asc, limit: 10).to_json
+before { content_type :json }
+
+get('/') { {error:'Need a game.'}.to_json }
+get '/:game' do
+  Highscore.all(
+    game: params[:game],
+    scope: params[:scope],
+    order: params[:reverse] ? :score.asc : :score.desc,
+    limit: 10
+  ).to_json
 end
 
-post '/' do
-  content_type :json
-  Highscore.create(params).to_json
+post('/') { {error:'Need a game.'}.to_json }
+post '/:game' do
+  Highscore.create(
+    game: params[:game],
+    scope: params[:scope],
+    player: params[:player],
+    score: params[:score]
+  ).to_json
 end
