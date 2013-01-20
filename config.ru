@@ -1,5 +1,5 @@
 require 'bundler'
 Bundler.require
 
-require './highscore'
+require './app'
 run Sinatra::Application
