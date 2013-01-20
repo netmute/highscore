@@ -21,7 +21,7 @@ get '/:game' do
     game: params[:game],
     scope: params[:scope],
     order: params[:reverse] ? :score.asc : :score.desc,
-    limit: params[:limit] || 10
+    limit: params[:limit].to_i || 10
   ).to_json
 end
 
