@@ -27,10 +27,14 @@ end
 
 post('/') { {error:'Need a game.'}.to_json }
 post '/:game' do
-  Highscore.create(
-    game: params[:game],
-    scope: params[:scope],
-    player: params[:player],
-    score: params[:score]
-  ).to_json
+  if params[:player].nil? || params[:score].nil?
+    {error:'Missing params.'}.to_json
+  else
+    Highscore.create(
+      game: params[:game],
+      scope: params[:scope],
+      player: params[:player],
+      score: params[:score]
+    ).to_json
+  end
 end
