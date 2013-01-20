@@ -1,4 +1,4 @@
 .bundle/
-highscore.db
+scores.db
 tmp/
 vendor/

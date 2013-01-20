@@ -1,4 +1,4 @@
-DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/highscore.db")
+DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/scores.db")
 
 class Highscore
     include DataMapper::Resource
